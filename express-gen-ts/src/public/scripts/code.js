@@ -25,10 +25,23 @@ const stdout = CodeMirror(document.getElementById('stdout-window'), {
 });
 let building = false;
 
+
+// Load code and input from localstorage
+code.setValue(localStorage.getItem('code') ?? '');
+input.setValue(localStorage.getItem('input') ?? '');
+
+// Auto save feature
+const saver = function () {
+    localStorage.setItem('code', code.getValue());
+    localStorage.setItem('input', input.getValue());
+};
+const intervalId = setInterval(saver, 2000);
+
 /**
  * Start everything from here
  */
 (function() {
+
     // Setup socket-io main connection
     console.log('Connecting to socket-io');
     const socket = io('/');
@@ -111,15 +124,19 @@ function receiveStdout(socket) {
     // });
     socket.on('stdout', (msg) => {
         stdout.setOption("lineWrapping", false);
-        if (building) return replaceMessage(msg);
+        if (building) {
+            building = false;
+            return replaceMessage(msg);
+        }
         addMessage(msg);
-        building = false;
     });
     socket.on('stderr', (msg) => {
         stdout.setOption("lineWrapping", true);
-        if (building) return replaceMessage(msg);
+        if (building) {
+            building = false;
+            return replaceMessage(msg);
+        }
         addMessage(msg);
-        building = false;
     });
 }
 
