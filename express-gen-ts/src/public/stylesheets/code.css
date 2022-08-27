@@ -1,0 +1,67 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+.editor {
+    height: 100vh;
+    width: 100vw;
+}
+.buttons {
+    height: 22px;
+}
+.workspace {
+    display: flex;
+    flex-direction: row;
+}
+.workspace-wrapper {
+    height: calc(100vh - 22px);
+    width: 100vw;
+}
+.CodeMirror {
+    height: 100% !important;
+    width: 100% !important;
+    padding: 0;
+    margin: 0;
+}
+.CodeMirror-scroll {
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+.code {
+    height: calc(100vh - 22px - 10px);
+    width: 50vw;
+    border-right: grey solid 1px;
+}
+
+.inputs {
+    width: 50vw;
+    height: calc(50vh - 22px / 2 - 5px);
+    border-bottom: grey solid 1px;
+}
+
+.outputs {
+    height: calc(50vh - 22px / 2 - 5px);
+    width: 50vw;
+}
+
+.buttons {
+    background-color: #28282CFF;
+    border-bottom: grey solid 1px;
+    padding: 5px;
+}
+
+.run {
+    background-color: #195d30;
+    color: whitesmoke;
+    outline: none;
+    border: none;
+    border-radius: 5px;
+    padding: 2px 5px;
+    float: right;
+    margin: 0 5px;
+}
+
+.run:hover {
+    background-color: #2b9b4e;
+}
